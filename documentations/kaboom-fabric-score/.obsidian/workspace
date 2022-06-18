@@ -1,0 +1,96 @@
+{
+  "main": {
+    "id": "98dda159903dbf33",
+    "type": "split",
+    "children": [
+      {
+        "id": "cf14cd0eea8d3ae8",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "project-information.md",
+            "mode": "preview",
+            "source": true
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "84e4229e33f03f31",
+    "type": "split",
+    "children": [
+      {
+        "id": "3f660b213322a997",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f66b8ce9035fe3b1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "30e972d5e91c8a75",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "01514a18b63329cb",
+    "type": "split",
+    "children": [
+      {
+        "id": "b3151ff65b4b1e8f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c22998f5be7ed6b2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "project-information.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 423
+  },
+  "active": "cf14cd0eea8d3ae8",
+  "lastOpenFiles": [
+    "project-information.md",
+    "webapp-kaboom-fabric-sorce.md",
+    "author.md",
+    "webapi-kaboom-fabric-score.md"
+  ]
+}
