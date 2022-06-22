@@ -4,4 +4,3 @@
 + Vuetify
 + Tailwind CSS
 + NodeJS
-
