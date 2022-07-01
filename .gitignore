@@ -1,44 +1,88 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
+## maven ###
+**/HELP.md
+**/target/
+!**/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 ### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+**/.apt_generated
+**/.classpath
+**/.factorypath
+**/.project
+**/.settings
+**/.springBeans
+**/.sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+**/.idea
+**/*.iws
+**/*.iml
+**/*.ipr
 
 ### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+**/build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
+**/.vscode/
 
 ### NuxtJS ###
-node_modules
-*.log*
-.nuxt
-.nitro
-.cache
-.output
-.env
-dist
+**/node_modules
+**/*.log*
+**/.nuxt
+**/.nitro
+**/.cache
+**/.output
+**/.env
+**/dist
 
+### fabric ###
+**/.#*
+**/*~
+**/*#
+**/.build
+**/*.cov
+**/docs/build/*
+**/.DS_Store
+**/.*-dummy
+**/.gradle
+**/*.iml
+**/.project
+**/release
+**/results.xml
+**/.settings
+**/.*.sw*
+**/tags
+**/.tags
+**/TESTS*.xml
+**/.vagrant/
+
+### fabric-ca ###
+**/*.csr
+**/*.der
+**/release
+**/coverage.xml
+**/fabric-ca-server-config.yaml
+**/profile.cov
+**/report.xml
+**/results.txt
+**/testdata/ec_cert.pem
+**/testdata/fabric*ca.db
+**/testdata/fabric-ca-cert.pem
+**/testdata/fabric-ca-key.pem
+**/testdata/initFabricCaFvt.json
+**/testdata/openssl.cnf.base.this
+**/testdata/runFabricCaFvt.json
+**/vendor/github.com/cloudflare/cfssl/vendor/github.com/cloudflare/cfssl_trust/ca-bundle/http:*.crt
+**/.tox/
+
+### network ###
+**/.dist
+**/bin
