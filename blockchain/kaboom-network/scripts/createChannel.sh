@@ -16,8 +16,8 @@ VERBOSE="$4"
 : ${CONTAINER_CLI_COMPOSE:="${CONTAINER_CLI} compose"}
 infoln "Using ${CONTAINER_CLI} and ${CONTAINER_CLI_COMPOSE}"
 
-if [ ! -d "./dist/channel-artifacts" ]; then
-	mkdir ./dist/channel-artifacts
+if [ ! -d "./.dist/channel-artifacts" ]; then
+	mkdir -p ./.dist/channel-artifacts
 fi
 
 createChannelGenesisBlock() {
@@ -26,7 +26,7 @@ createChannelGenesisBlock() {
 		fatalln "configtxgen tool not found."
 	fi
 	set -x
-	configtxgen -profile TwoOrgsApplicationGenesis -outputBlock ${PWD}/.dist/channel-artifacts/${CHANNEL_NAME}.block -channelID $CHANNEL_NAME
+	configtxgen -configPath ${PWD}/channels/mychannel.yaml -profile TwoOrgsApplicationGenesis -outputBlock ${PWD}/.dist/channel-artifacts/${CHANNEL_NAME}.block -channelID $CHANNEL_NAME
 	res=$?
 	{ set +x; } 2>/dev/null
   	verifyResult $res "Failed to generate channel configuration transaction..."
@@ -90,8 +90,6 @@ setAnchorPeer() {
   	${CONTAINER_CLI} exec cli.org2 ./scripts/setAnchorPeer.sh $ORG $CHANNEL_NAME 
   fi
 }
-
-FABRIC_CFG_PATH=${PWD}/configtx
 
 infoln "Generating channel genesis block '${CHANNEL_NAME}.block'"
 createChannelGenesisBlock
