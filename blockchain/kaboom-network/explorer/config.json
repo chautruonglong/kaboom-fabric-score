@@ -1,0 +1,9 @@
+{
+  "network-configs": {
+    "kaboom-network": {
+      "name": "Kaboom Network",
+      "profile": "./connection-profile/kaboom-network.json"
+    }
+  },
+  "license": "Apache-2.0"
+}

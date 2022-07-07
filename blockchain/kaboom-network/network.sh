@@ -2,7 +2,7 @@
 
 . scripts/utils.sh
 
-export PATH=${PWD}/../bin:$PATH
+export PATH=${PWD}/bin:$PATH
 export VERBOSE=false
 
 CRYPTO="cryptogen"
@@ -101,6 +101,22 @@ function deployCCAAS() {
   fi
 }
 
+function explorerUp() {
+  export EXPLORER_CONFIG_FILE_PATH="${PWD}/explorer/config.json"
+  export EXPLORER_PROFILE_DIR_PATH="${PWD}/explorer/connection-profile"
+  export FABRIC_CRYPTO_PATH="${PWD}/dist/organizations"
+
+  DOCKER_SOCK="${DOCKER_SOCK}" ${DOCKER_COMPOSE_CLI} -f "${PWD}/explorer/compose.explorer.yaml" up -d
+}
+
+function explorerDown() {
+  export EXPLORER_CONFIG_FILE_PATH="${PWD}/explorer/config.json"
+  export EXPLORER_PROFILE_DIR_PATH="${PWD}/explorer/connection-profile"
+  export FABRIC_CRYPTO_PATH="${PWD}/dist/organizations"
+
+  DOCKER_SOCK="${DOCKER_SOCK}" ${DOCKER_COMPOSE_CLI} -f "${PWD}/explorer/compose.explorer.yaml" down
+}
+
 if [[ $# -lt 1 ]] ; then
   printHelp
   exit 0
@@ -197,6 +213,10 @@ elif [ "$MODE" == "deployCC" ]; then
   deployCC
 elif [ "$MODE" == "deployCCAAS" ]; then
   deployCCAAS
+elif [ "$MODE" == "explorerUp" ]; then
+  explorerUp
+elif [ "$MODE" == "explorerDown" ]; then
+  explorerDown
 else
   printHelp
   exit 1

@@ -1,0 +1,66 @@
+{
+	"name": "kaboom-network",
+	"version": "1.0.0",
+	"client": {
+		"tlsEnable": true,
+		"adminCredential": {
+			"id": "exploreradmin",
+			"password": "exploreradminpw"
+		},
+		"enableAuthentication": true,
+		"organization": "KaboomMSP",
+		"connection": {
+			"timeout": {
+				"peer": {
+					"endorser": "300"
+				},
+				"orderer": "300"
+			}
+		}
+	},
+	"channels": {
+		"kaboom-channel": {
+			"peers": {
+				"peer0.kaboom.mvg-sky.com": {},
+        "peer1.kaboom.mvg-sky.com": {},
+        "peer2.kaboom.mvg-sky.com": {}
+			}
+		}
+	},
+	"organizations": {
+		"KaboomMSP": {
+			"mspid": "KaboomMSP",
+			"adminPrivateKey": {
+				"path": "/tmp/crypto/peerOrganizations/kaboom.mvg-sky.com/users/Admin@kaboom.mvg-sky.com/msp/keystore/4783b1007d84e2925320592356a3c9cd7486fa487e32996bace093037cad43fa_sk"
+			},
+			"peers": [
+        "peer0.kaboom.mvg-sky.com",
+        "peer1.kaboom.mvg-sky.com",
+        "peer2.kaboom.mvg-sky.com"
+      ],
+			"signedCert": {
+				"path": "/tmp/crypto/peerOrganizations/kaboom.mvg-sky.com/users/Admin@kaboom.mvg-sky.com/msp/signcerts/cert.pem"
+			}
+		}
+	},
+	"peers": {
+		"peer0.kaboom.mvg-sky.com": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/kaboom.mvg-sky.com/peers/peer0.kaboom.mvg-sky.com/tls/ca.crt"
+			},
+			"url": "grpcs://peer0.kaboom.mvg-sky.com:7051"
+		},
+    "peer1.kaboom.mvg-sky.com": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/kaboom.mvg-sky.com/peers/peer1.kaboom.mvg-sky.com/tls/ca.crt"
+			},
+			"url": "grpcs://peer0.kaboom.mvg-sky.com:7051"
+		},
+    "peer2.kaboom.mvg-sky.com": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/kaboom.mvg-sky.com/peers/peer2.kaboom.mvg-sky.com/tls/ca.crt"
+			},
+			"url": "grpcs://peer0.kaboom.mvg-sky.com:7051"
+		}
+	}
+}
