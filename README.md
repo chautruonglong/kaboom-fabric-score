@@ -46,6 +46,10 @@ chautruonglong@codex:kaboom-network$ cd ./run.sh
 
 ![Network](./documentations/images/network.png)
 
+- Explorer
+
+![Network](./documentations/images/explorer.png)
+
 > ### Run WebApp Front-end
 
 - Move to network directory
