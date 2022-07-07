@@ -1,0 +1,59 @@
+name: fabric-network.kaboom.mvg-sky.com
+
+version: 1.0.0
+
+client:
+  organization: kaboom.mvg-sky.com
+  connection:
+    timeout:
+      peer:
+        endorser: "300"
+
+organizations:
+  kaboom.mvg-sky.com:
+    mspid: ${LOCAL_MSP}
+    peers:
+      - peer0.kaboom.mvg-sky.com
+      - peer1.kaboom.mvg-sky.com
+      - peer2.kaboom.mvg-sky.com
+    certificateAuthorities:
+      - ca.kaboom.mvg-sky.com
+
+peers:
+  peer0.kaboom.mvg-sky.com:
+    url: grpcs://localhost:${P0PORT}
+    tlsCACerts:
+      pem: |
+        ${PEERPEM}
+    grpcOptions:
+      ssl-target-name-override: peer0.kaboom.mvg-sky.com
+      hostnameOverride: peer0.kaboom.mvg-sky.com
+
+  peer1.kaboom.mvg-sky.com:
+    url: grpcs://localhost:${P1PORT}
+    tlsCACerts:
+      pem: |
+        ${PEERPEM}
+    grpcOptions:
+      ssl-target-name-override: peer1.kaboom.mvg-sky.com
+      hostnameOverride: peer1.kaboom.mvg-sky.com
+
+  peer2.kaboom.mvg-sky.com:
+    url: grpcs://localhost:${P2PORT}
+    tlsCACerts:
+      pem: |
+        ${PEERPEM}
+    grpcOptions:
+      ssl-target-name-override: peer2.kaboom.mvg-sky.com
+      hostnameOverride: peer2.kaboom.mvg-sky.com
+
+certificateAuthorities:
+  ca.kaboom.mvg-sky.com:
+    url: https://localhost:${CAPORT}
+    caName: ca.kaboom.mvg-sky.com
+    tlsCACerts:
+      pem:
+        - |
+          ${CAPEM}
+    httpOptions:
+      verify: false

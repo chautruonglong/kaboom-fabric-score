@@ -14,7 +14,7 @@ function printHelp() {
     println
     println "    Flags:"
     println "    -ca <use CAs> -  Use Certificate Authorities to generate network crypto material"
-    println "    -c <channel name> - Name of channel to create (defaults to \"mychannel\")"
+    println "    -c <channel name> - Name of channel to create (defaults to \"kaboom-channel\")"
     println "    -s <dbtype> - Peer state database to deploy: goleveldb (default) or couchdb"
     println "    -r <max retry> - CLI times out after certain number of attempts (defaults to 5)"
     println "    -d <delay> - CLI delays for a certain number of seconds (defaults to 3)"
@@ -27,13 +27,13 @@ function printHelp() {
     println "   \033[0;32mup createChannel\033[0m -ca -c -r -d -s -verbose"
     println
     println " Examples:"
-    println "   network.sh up createChannel -ca -c mychannel -s couchdb "
+    println "   network.sh up createChannel -ca -c kaboom-channel -s couchdb "
   elif [ "$USAGE" == "createChannel" ]; then
     println "Usage: "
     println "  network.sh \033[0;32mcreateChannel\033[0m [Flags]"
     println
     println "    Flags:"
-    println "    -c <channel name> - Name of channel to create (defaults to \"mychannel\")"
+    println "    -c <channel name> - Name of channel to create (defaults to \"kaboom-channel\")"
     println "    -r <max retry> - CLI times out after certain number of attempts (defaults to 5)"
     println "    -d <delay> - CLI delays for a certain number of seconds (defaults to 3)"
     println "    -verbose - Verbose mode"
@@ -90,7 +90,7 @@ function printHelp() {
     println
     println " Examples:"
     println "   network.sh deployCCAAS  -ccn basicj -ccp ../asset-transfer-basic/chaincode-java"
-    println "   network.sh deployCCAAS  -ccn basict -ccp ../asset-transfer-basic/chaincode-typescript -ccaasdocker false"  
+    println "   network.sh deployCCAAS  -ccn basict -ccp ../asset-transfer-basic/chaincode-typescript -ccaasdocker false"
   else
     println "Usage: "
     println "  network.sh <Mode> [Flags]"
@@ -104,7 +104,7 @@ function printHelp() {
     println "    Flags:"
     println "    Used with \033[0;32mnetwork.sh up\033[0m, \033[0;32mnetwork.sh createChannel\033[0m:"
     println "    -ca <use CAs> -  Use Certificate Authorities to generate network crypto material"
-    println "    -c <channel name> - Name of channel to create (defaults to \"mychannel\")"
+    println "    -c <channel name> - Name of channel to create (defaults to \"kaboom-channel\")"
     println "    -s <dbtype> - Peer state database to deploy: goleveldb (default) or couchdb"
     println "    -r <max retry> - CLI times out after certain number of attempts (defaults to 5)"
     println "    -d <delay> - CLI delays for a certain number of seconds (defaults to 3)"
@@ -130,7 +130,7 @@ function printHelp() {
     println "   \033[0;32mdeployCC\033[0m -ccn -ccl -ccv -ccs -ccp -cci -r -d -verbose"
     println
     println " Examples:"
-    println "   network.sh up createChannel -ca -c mychannel -s couchdb"
+    println "   network.sh up createChannel -ca -c kaboom-channel -s couchdb"
     println "   network.sh createChannel -c channelName"
     println "   network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-javascript/ -ccl javascript"
     println "   network.sh deployCC -ccn mychaincode -ccp ./user/mychaincode -ccv 1 -ccl javascript"
@@ -140,7 +140,7 @@ function printHelp() {
 function checkPrereqs() {
   peer version > /dev/null 2>&1
 
-  if [[ $? -ne 0 || ! -d "config" ]]; then
+  if [ $? -ne 0 ]; then
     errorln "Peer binary and configuration files not found.."
     errorln
     errorln "Follow the instructions in the Fabric docs to install the Fabric Binaries:"
@@ -149,7 +149,7 @@ function checkPrereqs() {
   fi
 
   LOCAL_VERSION=$(peer version | sed -ne 's/^ Version: //p')
-  DOCKER_IMAGE_VERSION=$(${CONTAINER_CLI} run --rm hyperledger/fabric-tools:latest peer version | sed -ne 's/^ Version: //p')
+  DOCKER_IMAGE_VERSION=$(${DOCKER_CLI} run --rm hyperledger/fabric-tools:latest peer version | sed -ne 's/^ Version: //p')
 
   infoln "LOCAL_VERSION=$LOCAL_VERSION"
   infoln "DOCKER_IMAGE_VERSION=$DOCKER_IMAGE_VERSION"
@@ -216,8 +216,8 @@ function fatalln() {
   exit 1
 }
 
-export -f errorln
-export -f successln
-export -f infoln
-export -f warnln
-export -f fatalln
+function verifyResult() {
+  if [ $1 -ne 0 ]; then
+    fatalln "$2"
+  fi
+}

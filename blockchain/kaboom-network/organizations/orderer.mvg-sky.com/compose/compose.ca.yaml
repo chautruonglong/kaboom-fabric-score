@@ -1,0 +1,29 @@
+version: "3.7"
+
+networks:
+  network.orderer.mvg-sky.com:
+    name: network.orderer.mvg-sky.com
+  network.kaboom.mvg-sky.com:
+    name: network.kaboom.mvg-sky.com
+
+services:
+  ca.orderer.mvg-sky.com:
+    container_name: ca.orderer.mvg-sky.com
+    image: hyperledger/fabric-ca:latest
+    labels:
+      service: fabric.kaboom.mvg-sky.com
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.orderer.mvg-sky.com
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=9054
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:19054
+    ports:
+      - 9054:9054
+      - 19054:19054
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ${PWD}/dist/organizations/ordererOrganizations/orderer.mvg-sky.com/fabric-ca:/etc/hyperledger/fabric-ca-server
+    networks:
+      - network.orderer.mvg-sky.com
+      - network.kaboom.mvg-sky.com

@@ -1,0 +1,51 @@
+version: "3.7"
+
+volumes:
+  peer1.kaboom.mvg-sky.com:
+    name: peer1.kaboom.mvg-sky.com
+
+networks:
+  network.kaboom.mvg-sky.com:
+    name: network.kaboom.mvg-sky.com
+
+services:
+  peer1.kaboom.mvg-sky.com:
+    container_name: peer1.kaboom.mvg-sky.com
+    image: hyperledger/fabric-peer:latest
+    labels:
+      service: fabric.kaboom.mvg-sky.com
+    environment:
+      - FABRIC_CFG_PATH=/etc/hyperledger/peercfg
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_PROFILE_ENABLED=false
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      - CORE_PEER_ID=peer1.kaboom.mvg-sky.com
+      - CORE_PEER_ADDRESS=peer1.kaboom.mvg-sky.com:7051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.kaboom.mvg-sky.com:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.kaboom.mvg-sky.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.kaboom.mvg-sky.com:7051
+      - CORE_PEER_LOCALMSPID=KaboomMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
+      - CORE_OPERATIONS_LISTENADDRESS=peer1.kaboom.mvg-sky.com:9444
+      - CORE_METRICS_PROVIDER=prometheus
+      - CHAINCODE_AS_A_SERVICE_BUILDER_CONFIG={"peername":"chaincode.kaboom.mvg-sky.com"}
+      - CORE_CHAINCODE_EXECUTETIMEOUT=300s
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=network.kaboom.mvg-sky.com
+    volumes:
+      - ${DOCKER_SOCK}:/host/var/run/docker.sock
+      - peer1.kaboom.mvg-sky.com:/var/hyperledger/production
+      - ${PWD}/organizations/kaboom.mvg-sky.com/config/config.core.yaml:/etc/hyperledger/peercfg/core.yaml
+      - ${PWD}/dist/organizations/peerOrganizations/kaboom.mvg-sky.com/peers/peer1.kaboom.mvg-sky.com:/etc/hyperledger/fabric
+    working_dir: /root
+    command: peer node start
+    ports:
+      - 8051:7051
+      - 10444:9444
+    networks:
+      - network.kaboom.mvg-sky.com

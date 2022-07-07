@@ -1,0 +1,42 @@
+version: "3.7"
+
+networks:
+  network.kaboom.mvg-sky.com:
+    name: network.kaboom.mvg-sky.com
+
+services:
+  peer0.kaboom.mvg-sky.com:
+    networks:
+      - network.kaboom.mvg-sky.com
+
+  peer1.kaboom.mvg-sky.com:
+    networks:
+      - network.kaboom.mvg-sky.com
+
+  peer2.kaboom.mvg-sky.com:
+    networks:
+      - network.kaboom.mvg-sky.com
+
+  cli.kaboom.mvg-sky.com:
+    container_name: cli.kaboom.mvg-sky.com
+    image: hyperledger/fabric-tools:latest
+    labels:
+      service: fabric.kaboom.mvg-sky.com
+    tty: true
+    stdin_open: true
+    environment:
+      - GOPATH=/opt/gopath
+      - FABRIC_LOGGING_SPEC=INFO
+      - FABRIC_CFG_PATH=/etc/hyperledger/peercfg
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+      - ${PWD}/scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts
+      - ${PWD}/organizations/kaboom.mvg-sky.com/config/config.core.yaml:/etc/hyperledger/peercfg/core.yaml
+      - ${PWD}/dist/organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/dist/organizations
+    depends_on:
+      - peer0.kaboom.mvg-sky.com
+      - peer1.kaboom.mvg-sky.com
+      - peer2.kaboom.mvg-sky.com
+    networks:
+      - network.kaboom.mvg-sky.com

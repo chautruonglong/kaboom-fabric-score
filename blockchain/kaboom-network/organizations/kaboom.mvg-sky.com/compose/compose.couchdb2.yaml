@@ -1,0 +1,30 @@
+version: "3.7"
+
+networks:
+  network.kaboom.mvg-sky.com:
+    name: network.kaboom.mvg-sky.com
+
+services:
+  couchdb2.kaboom.mvg-sky.com:
+    container_name: couchdb2.kaboom.mvg-sky.com
+    image: couchdb:3.1.1
+    labels:
+      service: fabric.kaboom.mvg-sky.com
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=adminpw
+    ports:
+      - 7984:5984
+    networks:
+      - network.kaboom.mvg-sky.com
+
+  peer2.kaboom.mvg-sky.com:
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb2.kaboom.mvg-sky.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=admin
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw
+    depends_on:
+      - couchdb2.kaboom.mvg-sky.com
+    networks:
+      - network.kaboom.mvg-sky.com

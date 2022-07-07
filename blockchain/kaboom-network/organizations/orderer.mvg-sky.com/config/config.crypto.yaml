@@ -1,0 +1,17 @@
+OrdererOrgs:
+  - Name: Orderer
+    Domain: orderer.mvg-sky.com
+    EnableNodeOUs: true
+    Specs:
+      - Hostname: orderer0
+        CommonName: orderer0.orderer.mvg-sky.com
+        SANS:
+          - localhost
+      - Hostname: orderer1
+        CommonName: orderer1.orderer.mvg-sky.com
+        SANS:
+          - localhost
+      - Hostname: orderer2
+        CommonName: orderer2.orderer.mvg-sky.com
+        SANS:
+          - localhost

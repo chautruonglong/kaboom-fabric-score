@@ -1,0 +1,57 @@
+version: "3.7"
+
+volumes:
+  orderer1.orderer.mvg-sky.com:
+    name: orderer1.orderer.mvg-sky.com
+
+networks:
+  network.orderer.mvg-sky.com:
+    name: network.orderer.mvg-sky.com
+  network.kaboom.mvg-sky.com:
+    name: network.kaboom.mvg-sky.com
+
+services:
+  orderer1.orderer.mvg-sky.com:
+    container_name: orderer1.orderer.mvg-sky.com
+    image: hyperledger/fabric-orderer:latest
+    labels:
+      service: fabric.kaboom.mvg-sky.com
+    environment:
+      - FABRIC_LOGGING_SPEC=INFO
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_LISTENPORT=7050
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_GENERAL_BOOTSTRAPMETHOD=file
+      - ORDERER_GENERAL_BOOTSTRAPFILE=/var/hyperledger/orderer/orderer.genesis.block
+      - ORDERER_CHANNELPARTICIPATION_ENABLED=true
+      - ORDERER_ADMIN_TLS_ENABLED=true
+      - ORDERER_ADMIN_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_ADMIN_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_ADMIN_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_ADMIN_TLS_CLIENTROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_ADMIN_LISTENADDRESS=0.0.0.0:7053
+      - ORDERER_OPERATIONS_LISTENADDRESS=orderer1.orderer.mvg-sky.com:9443
+      - ORDERER_METRICS_PROVIDER=prometheus
+    working_dir: /root
+    command: orderer
+    volumes:
+      - orderer1.orderer.mvg-sky.com:/var/hyperledger/production/orderer
+      - ${PWD}/dist/organizations/ordererOrganizations/orderer.mvg-sky.com/orderers/orderer1.orderer.mvg-sky.com/msp:/var/hyperledger/orderer/msp
+      - ${PWD}/dist/organizations/ordererOrganizations/orderer.mvg-sky.com/orderers/orderer1.orderer.mvg-sky.com/tls:/var/hyperledger/orderer/tls
+      - ${PWD}/organizations/orderer.mvg-sky.com/config/config.orderer.yaml:/etc/hyperledger/fabric/orderer.yaml
+      - ${PWD}/dist/channel-artifacts/kaboom-channel.block:/var/hyperledger/orderer/orderer.genesis.block
+    ports:
+      - 8050:7050
+      - 8053:7053
+      - 10443:9443
+    networks:
+      - network.orderer.mvg-sky.com
+      - network.kaboom.mvg-sky.com

@@ -1,0 +1,145 @@
+Organizations:
+  - &OrdererOrg
+    Name: OrdererMSP
+    ID: OrdererMSP
+    MSPDir: ../dist/organizations/ordererOrganizations/orderer.mvg-sky.com/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('OrdererMSP.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('OrdererMSP.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('OrdererMSP.admin')"
+    OrdererEndpoints:
+      - orderer0.orderer.mvg-sky.com:7050
+      - orderer1.orderer.mvg-sky.com:7050
+      - orderer2.orderer.mvg-sky.com:7050
+
+  - &KaboomOrg
+    Name: KaboomMSP
+    ID: KaboomMSP
+    MSPDir: ../dist/organizations/peerOrganizations/kaboom.mvg-sky.com/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('KaboomMSP.admin', 'KaboomMSP.peer', 'KaboomMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('KaboomMSP.admin', 'KaboomMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('KaboomMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('KaboomMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.kaboom.mvg-sky.com
+        Port: 7051
+      - Host: peer1.kaboom.mvg-sky.com
+        Port: 7051
+      - Host: peer2.kaboom.mvg-sky.com
+        Port: 7051
+
+Capabilities:
+  Channel: &ChannelCapabilities
+    V2_0: true
+  Orderer: &OrdererCapabilities
+    V2_0: true
+  Application: &ApplicationCapabilities
+    V2_0: true
+
+Application: &ApplicationDefaults
+  Organizations:
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+    LifecycleEndorsement:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Endorsement"
+    Endorsement:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Endorsement"
+  Capabilities:
+    <<: *ApplicationCapabilities
+
+Orderer: &OrdererDefaults
+  OrdererType: etcdraft
+  Addresses:
+    - orderer0.orderer.mvg-sky.com:7050
+    - orderer1.orderer.mvg-sky.com:7050
+    - orderer2.orderer.mvg-sky.com:7050
+  EtcdRaft:
+    Consenters:
+      - Host: orderer0.orderer.mvg-sky.com
+        Port: 7050
+        ClientTLSCert: ../dist/organizations/ordererOrganizations/orderer.mvg-sky.com/orderers/orderer0.orderer.mvg-sky.com/tls/server.crt
+        ServerTLSCert: ../dist/organizations/ordererOrganizations/orderer.mvg-sky.com/orderers/orderer0.orderer.mvg-sky.com/tls/server.crt
+      - Host: orderer1.orderer.mvg-sky.com
+        Port: 7050
+        ClientTLSCert: ../dist/organizations/ordererOrganizations/orderer.mvg-sky.com/orderers/orderer1.orderer.mvg-sky.com/tls/server.crt
+        ServerTLSCert: ../dist/organizations/ordererOrganizations/orderer.mvg-sky.com/orderers/orderer1.orderer.mvg-sky.com/tls/server.crt
+      - Host: orderer2.orderer.mvg-sky.com
+        Port: 7050
+        ClientTLSCert: ../dist/organizations/ordererOrganizations/orderer.mvg-sky.com/orderers/orderer2.orderer.mvg-sky.com/tls/server.crt
+        ServerTLSCert: ../dist/organizations/ordererOrganizations/orderer.mvg-sky.com/orderers/orderer2.orderer.mvg-sky.com/tls/server.crt
+  BatchTimeout: 2s
+  BatchSize:
+    MaxMessageCount: 10
+    AbsoluteMaxBytes: 99 MB
+    PreferredMaxBytes: 512 KB
+  Organizations:
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+    BlockValidation:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+
+Channel: &ChannelDefaults
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+  Capabilities:
+    <<: *ChannelCapabilities
+
+Profiles:
+  OrgApplicationGenesis:
+    <<: *ChannelDefaults
+    Orderer:
+      <<: *OrdererDefaults
+      Organizations:
+        - *OrdererOrg
+      Capabilities: *OrdererCapabilities
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+        - *KaboomOrg
+      Capabilities: *ApplicationCapabilities
+    Consortiums:
+      SampleConsortium:
+        Organizations:
+          - *KaboomOrg

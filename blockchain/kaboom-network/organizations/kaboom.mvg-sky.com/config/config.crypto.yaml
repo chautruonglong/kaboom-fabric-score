@@ -1,0 +1,19 @@
+PeerOrgs:
+  - Name: Kaboom
+    Domain: kaboom.mvg-sky.com
+    EnableNodeOUs: true
+    Specs:
+      - Hostname: peer0
+        CommonName: peer0.kaboom.mvg-sky.com
+        SANS:
+          - localhost
+      - Hostname: peer1
+        CommonName: peer1.kaboom.mvg-sky.com
+        SANS:
+          - localhost
+      - Hostname: peer2
+        CommonName: peer2.kaboom.mvg-sky.com
+        SANS:
+          - localhost
+    Users:
+      Count: 1

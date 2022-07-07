@@ -92,7 +92,7 @@ METADATA-EOF
 if [ "$type" = "ccaas" ]; then
     tar -C "$tempdir/src" -czf "$tempdir/pkg/code.tar.gz" .
 else
-    tar -C "$tempdir" -czf "$tempdir/pkg/code.tar.gz" src 
+    tar -C "$tempdir" -czf "$tempdir/pkg/code.tar.gz" src
 fi
 
 tar -C "$tempdir/pkg" -czf "$label.tgz" metadata.json code.tar.gz
@@ -100,5 +100,4 @@ tar -C "$tempdir/pkg" -czf "$label.tgz" metadata.json code.tar.gz
 rm -Rf "$tempdir"
 
 packageid="${label}:$(shasum -a 256 audit-trail.tgz | cut -d ' ' -f1)"
-
 echo ${packageid}
