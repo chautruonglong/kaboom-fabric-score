@@ -48,17 +48,17 @@ services:
             - SPRING_CLOUD_CONFIG_ENABLED=${CLOUD_CONFIG}
             - COM_MVG_SKY_JAMES_URL=${JMX_JAMES}
 
-    mvg-sky-service-chat:
-        container_name: mvg-sky-service-chat
-        image: mvg-sky-service-chat-jdk-17
+    mvg-sky-service-realtime:
+        container_name: mvg-sky-service-realtime
+        image: mvg-sky-service-realtime-jdk-17
         restart: always
-        build: ./service-chat
+        build: ./service-realtime
         ports:
             - "8001:8001"
         networks:
             - mvg-sky-net
         volumes:
-            - ${EXTERNAL_RESOURCES}/chat:${DOCKER_EXTERNAL_RESOURCES}/chat
+            - ${EXTERNAL_RESOURCES}/realtime:${DOCKER_EXTERNAL_RESOURCES}/realtime
         depends_on:
             - mvg-sky-service-discovery
             - mvg-sky-service-configuration
@@ -67,7 +67,7 @@ services:
             - SPRING_DATASOURCE_URL=${PG_URL}
             - SPRING_DATASOURCE_USERNAME=${PG_USERNAME}
             - SPRING_DATASOURCE_PASSWORD=${PG_PASSWORD}
-            - COM_MVG_SKY_SERVICECHAT_EXTERNALRESOURCE=file:${DOCKER_EXTERNAL_RESOURCES}/chat/
+            - COM_MVG_SKY_SERVICECHAT_EXTERNALRESOURCE=file:${DOCKER_EXTERNAL_RESOURCES}/realtime/
             - SPRING_PROFILES_ACTIVE=${PROFILE}
             - SPRING_CLOUD_CONFIG_ENABLED=${CLOUD_CONFIG}
 
