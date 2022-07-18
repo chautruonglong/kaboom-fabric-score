@@ -7,6 +7,7 @@ import javax.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.CharEncoding;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -23,7 +24,7 @@ public record MimeMessageBuilder(JavaMailSender javaMailSender) {
         mimeMessageHelper.setFrom(from);
         mimeMessageHelper.setTo(mailSendingRequest.getTo().toArray(String[]::new));
         mimeMessageHelper.setSubject(mailSendingRequest.getSubject());
-        mimeMessageHelper.setText(mailSendingRequest.getBody(), true);
+        mimeMessageHelper.setText(StringEscapeUtils.unescapeHtml(mailSendingRequest.getBody()), true);
 
         if(mailSendingRequest.getCc() != null) {
             mimeMessageHelper.setCc(mailSendingRequest.getCc().toArray(String[]::new));

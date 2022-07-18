@@ -12,8 +12,6 @@ import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.mail.util.MimeMessageParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -33,7 +31,7 @@ public class MailMessageParser extends MimeMessageParser {
 
         if (message.isMimeType("multipart")) {
 //            this.htmlContent = super.getHtmlContent().replaceAll("\\r\\n|\\r|\\n|\\R", "");
-            this.htmlContent = StringEscapeUtils.unescapeHtml(super.getHtmlContent());
+            this.htmlContent = super.getHtmlContent();
         } else {
             this.htmlContent = super.getPlainContent();
         }
@@ -64,7 +62,7 @@ public class MailMessageParser extends MimeMessageParser {
                 }
             });
 //            htmlContent = document.html().replaceAll("\\r\\n|\\r|\\n|\\R", "");
-            htmlContent = StringEscapeUtils.unescapeHtml(document.html());
+            htmlContent = document.html();
         }
     }
 
