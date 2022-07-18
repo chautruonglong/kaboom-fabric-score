@@ -2,8 +2,8 @@ springdoc:
     swagger-ui:
         urls:
             - name: service-account
-              url: http://localhost:/api/accounts/api-docs
-            - name: service-chat
-              url: http://api.mvg-sky.com/api/chats/api-docs
+              url: http://api.mvg-sky.com/api/accounts/api-docs
+            - name: service-realtime
+              url: http://api.mvg-sky.com/api/realtime/api-docs
             - name: service-mail
               url: http://api.mvg-sky.com/api/mails/api-docs
