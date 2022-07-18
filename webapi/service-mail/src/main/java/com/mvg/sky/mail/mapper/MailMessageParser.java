@@ -33,7 +33,7 @@ public class MailMessageParser extends MimeMessageParser {
 
         if (message.isMimeType("multipart")) {
 //            this.htmlContent = super.getHtmlContent().replaceAll("\\r\\n|\\r|\\n|\\R", "");
-            this.htmlContent = StringEscapeUtils.escapeHtml(super.getHtmlContent());
+            this.htmlContent = StringEscapeUtils.unescapeHtml(super.getHtmlContent());
         } else {
             this.htmlContent = super.getPlainContent();
         }
@@ -64,7 +64,7 @@ public class MailMessageParser extends MimeMessageParser {
                 }
             });
 //            htmlContent = document.html().replaceAll("\\r\\n|\\r|\\n|\\R", "");
-            htmlContent = StringEscapeUtils.escapeHtml(document.html());
+            htmlContent = StringEscapeUtils.unescapeHtml(document.html());
         }
     }
 
