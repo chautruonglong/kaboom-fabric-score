@@ -288,33 +288,43 @@ export default {
             password: this.password,
           })
             .then(response => {
-              const { userData } = response.data
+              const account = {
+                ...response.data.account,
+                ability: [{
+                  action: 'manage',
+                  subject: 'all'
+                }]
+              }
+
               useJwt.setToken(response.data.accessToken)
               useJwt.setRefreshToken(response.data.refreshToken)
-              localStorage.setItem('userData', JSON.stringify(userData))
-              this.$ability.update(userData.ability)
+              localStorage.setItem('userData', JSON.stringify(account))
+              this.$ability.update(account.ability)
 
               // ? This is just for demo purpose as well.
               // ? Because we are showing eCommerce app's cart items count in navbar
-              this.$store.commit('app-ecommerce/UPDATE_CART_ITEMS_COUNT', userData.extras.eCommerceCartItemsCount)
+              // this.$store.commit('app-ecommerce/UPDATE_CART_ITEMS_COUNT', userData.extras.eCommerceCartItemsCount)
 
               // ? This is just for demo purpose. Don't think CASL is role based in this case, we used role in if condition just for ease
-              this.$router.replace(getHomeRouteForLoggedInUser(userData.role))
-                .then(() => {
+              this.$router.replace(getHomeRouteForLoggedInUser('admin'),
+                () => {
+                  this.$router.go(0)
+
                   this.$toast({
                     component: ToastificationContent,
                     position: 'top-right',
                     props: {
-                      title: `Welcome ${userData.fullName || userData.username}`,
+                      title: `Welcome ${account.email}`,
                       icon: 'CoffeeIcon',
                       variant: 'success',
-                      text: `You have successfully logged in as ${userData.role}. Now you can start to explore!`,
+                      text: `You have successfully logged in as ${'admin'}. Now you can start to explore!`,
                     },
                   })
+                },
+                (error) => {
+                  console.log(error)
+                  this.$refs.loginForm.setErrors(error.response.data.error)
                 })
-            })
-            .catch(error => {
-              this.$refs.loginForm.setErrors(error.response.data.error)
             })
         }
       })

@@ -25,6 +25,12 @@ import { useWindowSize, useCssVar } from '@vueuse/core'
 
 import store from '@/store'
 
+import SockJS from "sockjs-client"
+import Stomp from "stompjs"
+import AbstractXHRObject from "sockjs-client/lib/transport/browser/abstract-xhr"
+
+import { isUserLoggedIn, getUserData } from '@/auth/utils'
+
 const LayoutVertical = () => import('@/layouts/vertical/LayoutVertical.vue')
 const LayoutHorizontal = () => import('@/layouts/horizontal/LayoutHorizontal.vue')
 const LayoutFull = () => import('@/layouts/full/LayoutFull.vue')
@@ -102,5 +108,25 @@ export default {
       enableScrollToTop,
     }
   },
+  created() {
+    if (isUserLoggedIn()) {
+      const _start = AbstractXHRObject.prototype._start;
+
+      AbstractXHRObject.prototype._start = function (method, url, payload, opts) {
+        if (!opts) {
+          opts = { noCredentials: true };
+        }
+        return _start.call(this, method, url, payload, opts);
+      };
+
+      const baseUrl = process.env.VUE_APP_API_URL
+      const sockJS = new SockJS(`${baseUrl}/chats/ws`)
+      const stompClient = Stomp.over(sockJS)
+
+      stompClient.connect({}, () => {
+        console.log('ok')
+      })
+    }
+  }
 }
 </script>

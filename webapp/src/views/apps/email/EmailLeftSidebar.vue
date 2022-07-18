@@ -44,7 +44,7 @@
             </b-list-group>
 
             <!-- Labels -->
-            <h6 class="section-label mt-3 mb-1 px-2">
+            <!-- <h6 class="section-label mt-3 mb-1 px-2">
               Labels
             </h6>
 
@@ -62,7 +62,7 @@
                 />
                 <span>{{ label.title }}</span>
               </b-list-group-item>
-            </b-list-group>
+            </b-list-group> -->
 
           </vue-perfect-scrollbar>
         </div>

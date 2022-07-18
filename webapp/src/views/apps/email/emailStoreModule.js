@@ -1,4 +1,7 @@
 import axios from '@axios'
+import { getUserData } from '@/auth/utils'
+
+const baseUrl = process.env.VUE_APP_API_URL
 
 export default {
   namespaced: true,
@@ -7,9 +10,15 @@ export default {
   mutations: {},
   actions: {
     fetchEmails(ctx, payload) {
+      const userData = getUserData()
+      payload = {
+        ...payload,
+        accountId: userData.id
+      }
+
       return new Promise((resolve, reject) => {
         axios
-          .get('/apps/email/emails', { params: payload })
+          .get(`${baseUrl}/mails`, { params: payload })
           .then(response => resolve(response))
           .catch(error => reject(error))
       })

@@ -1,9 +1,11 @@
+const baseUrl = process.env.VUE_APP_API_URL
+
 export default {
   // Endpoints
-  loginEndpoint: '/jwt/login',
-  registerEndpoint: '/jwt/register',
-  refreshEndpoint: '/jwt/refresh-token',
-  logoutEndpoint: '/jwt/logout',
+  loginEndpoint: `${baseUrl}/accounts/login`,
+  registerEndpoint: `${baseUrl}/accounts`,
+  refreshEndpoint: `${baseUrl}/sessions/refresh`,
+  logoutEndpoint: `${baseUrl}/accounts/{0}/logout`,
 
   // This will be prefixed in authorization header with token
   // e.g. Authorization: Bearer <token>

@@ -54,7 +54,7 @@ public class MailMessageParser extends MimeMessageParser {
                     String escape = UrlEscapers.urlFragmentEscaper().escape("http://api.mvg-sky.com/api/mails-resources/attachment/" + path);
                     element.attr("src", escape);
                 }
-                catch(MessagingException e) {
+                catch(Exception e) {
                     e.printStackTrace();
                 }
             });

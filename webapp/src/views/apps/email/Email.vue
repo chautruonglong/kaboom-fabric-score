@@ -154,7 +154,7 @@
             :key="email.id"
             tag="li"
             no-body
-            :class="{ 'mail-read': email.isRead }"
+            :class="{ 'mail-read': email.isSeen }"
             @click="updateEmailViewData(email)"
           >
 
@@ -186,7 +186,7 @@
               <div class="mail-details">
                 <div class="mail-items">
                   <h5 class="mb-25">
-                    {{ email.from.name }}
+                    {{ email.from }}
                   </h5>
                   <span class="text-truncate">{{ email.subject }}</span>
                 </div>
@@ -201,13 +201,13 @@
                     class="mx-50 bullet bullet-sm"
                     :class="`bullet-${resolveLabelColor(label)}`"
                   />
-                  <span class="mail-date">{{ formatDateToMonthShort(email.time, { hour: 'numeric', minute: 'numeric', }) }}</span>
+                  <span class="mail-date">{{ formatDateToMonthShort(email.sendDate, { hour: 'numeric', minute: 'numeric', }) }}</span>
                 </div>
               </div>
 
               <div class="mail-message">
                 <p class="text-truncate mb-0">
-                  {{ filterTags(email.message) }}
+                  {{ filterTags(email.body) }}
                 </p>
               </div>
             </b-media-body>
@@ -340,12 +340,12 @@ export default {
     const fetchEmails = () => {
       store.dispatch('app-email/fetchEmails', {
         q: searchQuery.value,
-        folder: router.currentRoute.params.folder || 'inbox',
+        mailbox: router.currentRoute.params.folder || 'inbox',
         label: router.currentRoute.params.label,
       })
         .then(response => {
-          emails.value = response.data.emails
-          emailsMeta.value = response.data.emailsMeta
+          emails.value = response.data
+          emailsMeta.value = response.data
         })
     }
 

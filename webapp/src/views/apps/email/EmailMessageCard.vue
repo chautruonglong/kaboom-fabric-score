@@ -12,7 +12,7 @@
         />
         <div class="mail-items">
           <h5 class="mb-0">
-            {{ message.from.name }}
+            {{ message.from }}
           </h5>
           <b-dropdown
             variant="link"
@@ -21,7 +21,7 @@
             class="email-info-dropup"
           >
             <template #button-content>
-              <span class="font-small-3 text-muted mr-25">{{ message.from.email }}</span>
+              <span class="font-small-3 text-muted mr-25">{{ message.from }}</span>
               <feather-icon
                 icon="ChevronDownIcon"
                 size="10"
@@ -33,13 +33,19 @@
                   <td class="text-right text-muted align-top">
                     From:
                   </td>
-                  <td>{{ message.from.email }}</td>
+                  <td>{{ message.from }}</td>
                 </tr>
                 <tr>
                   <td class="text-right text-muted align-top">
                     To:
                   </td>
-                  <td>{{ message.to.map(receiver => receiver.email).join(', ') }}</td>
+                  <td>{{ message.to.join(', ') }}</td>
+                </tr>
+                <tr>
+                  <td class="text-right text-muted align-top">
+                    cc:
+                  </td>
+                  <td>{{ message.cc.join(', ') }}</td>
                 </tr>
                 <tr>
                   <td class="text-right text-muted align-top">
@@ -53,7 +59,7 @@
         </div>
       </div>
       <div class="mail-meta-item d-flex align-items-center">
-        <small class="mail-date-time text-muted">{{ formatDate(message.time) }}</small>
+        <small class="mail-date-time text-muted">{{ formatDate(message.sendDate) }}</small>
         <!-- Mail Action DD -->
         <b-dropdown
           variant="link"
@@ -91,7 +97,7 @@
       <!-- eslint-disable vue/no-v-html -->
       <div
         class="mail-message"
-        v-html="message.message"
+        v-html="message.body"
       />
       <!-- eslint-enable -->
     </b-card-body>
