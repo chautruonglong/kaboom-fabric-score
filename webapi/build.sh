@@ -2,7 +2,7 @@
 
 set -x
 
-export JAVA_HOME=/home/chautruonglong/.sdkman/candidates/java/17.0.3-oracle
+export JAVA_HOME=/root/.sdkman/candidates/java/17.0.3-oracle
 
 ./mvnw clean
 
@@ -30,7 +30,7 @@ export PG_USERNAME=postgres
 export PG_PASSWORD=Ctlbi@0775516337
 
 export DOCKER_EXTERNAL_RESOURCES=/mvg-sky/resources
-export EXTERNAL_RESOURCES=/home/chautruonglong/Desktop/resources
+export EXTERNAL_RESOURCES=/root/deployment/resources
 
 export REGISTRY=http://mvg-sky-service-discovery:8000/eureka/
 export JMX_JAMES=service:jmx:rmi:///jndi/rmi://mvg-sky.com:9999/jmxrmi
