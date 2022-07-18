@@ -28,13 +28,7 @@ public class MailMessageParser extends MimeMessageParser {
 
         this.externalResources = externalResources;
         this.urlAttachments = new ArrayList<>();
-
-        if (message.isMimeType("multipart")) {
-//            this.htmlContent = super.getHtmlContent().replaceAll("\\r\\n|\\r|\\n|\\R", "");
-            this.htmlContent = super.getHtmlContent();
-        } else {
-            this.htmlContent = super.getPlainContent();
-        }
+        this.htmlContent = super.getHtmlContent();
     }
 
     public boolean isInlineImage() {
