@@ -13,7 +13,7 @@ export JAVA_HOME=/home/chautruonglong/.sdkman/candidates/java/17.0.3-oracle
   -pl service-discovery \
   -pl service-gateway \
   -pl service-account \
-  -pl service-chat \
+  -pl service-realtime \
   -pl service-mail \
   -pl service-smtp \
   -pl service-imap \
