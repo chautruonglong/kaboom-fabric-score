@@ -28,7 +28,10 @@ public class MailMessageParser extends MimeMessageParser {
 
         this.externalResources = externalResources;
         this.urlAttachments = new ArrayList<>();
-        this.htmlContent = super.getPlainContent();
+
+        if (hasHtmlContent()) {
+            this.htmlContent = super.getHtmlContent().replaceAll("\\r\\n|\\r|\\n|\\R", "");
+        }
     }
 
     public boolean isInlineImage() {
@@ -55,8 +58,7 @@ public class MailMessageParser extends MimeMessageParser {
                     e.printStackTrace();
                 }
             });
-//            htmlContent = document.html().replaceAll("\\r\\n|\\r|\\n|\\R", "");
-            htmlContent = document.html();
+            htmlContent = document.html().replaceAll("\\r\\n|\\r|\\n|\\R", "");
         }
     }
 
