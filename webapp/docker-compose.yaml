@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  mvg-sky-kaboom:
+    container_name: mvg-sky-kaboom
+    image: mvg-sky-kaboom
+    restart: always
+    build: .
+    ports:
+        - "5000:3000"
+    environment:
+      - PORT=3000

@@ -18,7 +18,7 @@ spring:
                 -   id: service-realtime
                     uri: lb://SERVICE-REALTIME
                     predicates:
-                        - Path=/api/chats/**, /api/rooms/**, /api/messages/**, /api/members/**, /api/chats-resources/**
+                        - Path=/api/realtime/**, /api/chats/**, /api/rooms/**, /api/messages/**, /api/members/**, /api/chats-resources/**
                     filters:
                         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
 
