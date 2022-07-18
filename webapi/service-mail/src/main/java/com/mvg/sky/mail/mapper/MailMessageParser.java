@@ -30,7 +30,8 @@ public class MailMessageParser extends MimeMessageParser {
         this.urlAttachments = new ArrayList<>();
 
         if (message.isMimeType("multipart")) {
-            this.htmlContent = super.getHtmlContent().replaceAll("\\r\\n|\\r|\\n|\\R", "");
+//            this.htmlContent = super.getHtmlContent().replaceAll("\\r\\n|\\r|\\n|\\R", "");
+            this.htmlContent = super.getHtmlContent();
         } else {
             this.htmlContent = super.getPlainContent();
         }
