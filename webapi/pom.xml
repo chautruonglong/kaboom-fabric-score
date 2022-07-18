@@ -18,7 +18,7 @@
         <module>service-mail</module>
         <module>service-smtp</module>
         <module>service-imap</module>
-        <module>service-chat</module>
+        <module>service-realtime</module>
         <module>admin-portal</module>
         <module>module-james</module>
     </modules>
