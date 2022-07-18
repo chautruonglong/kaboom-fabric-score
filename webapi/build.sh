@@ -2,7 +2,7 @@
 
 set -x
 
-export JAVA_HOME=/root/.sdkman/candidates/java/17.0.1-oracle
+export JAVA_HOME=/home/chautruonglong/.sdkman/candidates/java/17.0.3-oracle
 
 ./mvnw clean
 
@@ -35,8 +35,8 @@ export EXTERNAL_RESOURCES=/home/chautruonglong/Desktop/resources
 export REGISTRY=http://mvg-sky-service-discovery:8000/eureka/
 export JMX_JAMES=service:jmx:rmi:///jndi/rmi://mvg-sky.com:9999/jmxrmi
 
-docker-compose build --no-cache
-docker-compose up -d
+docker compose build --no-cache
+docker compose up -d
 
 # shellcheck disable=SC2046
-docker rmi $(docker images -f "dangling=true" -aq)
+#docker rmi $(docker images -f "dangling=true" -aq)

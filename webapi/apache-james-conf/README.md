@@ -8,11 +8,11 @@
 $ systemctl daemon-reload
 
 > start service
-$ systmctl start mvg-sky-apache-james.service
+$ systemctl start mvg-sky-apache-james.service
 
 > check status service
-$ systmctl status mvg-sky-apache-james.service
+$ systemctl status mvg-sky-apache-james.service
 
 > stop service
-$ systmctl stop mvg-sky-apache-james.service
+$ systemctl stop mvg-sky-apache-james.service
 ```

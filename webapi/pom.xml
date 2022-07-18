@@ -21,8 +21,6 @@
         <module>service-chat</module>
         <module>admin-portal</module>
         <module>module-james</module>
-        <module>service-blockchain</module>
-        <module>service-blockchain</module>
     </modules>
     <name>mvg-sky-backend</name>
     <description>mvg-sky-backend</description>

@@ -54,20 +54,25 @@ export default {
         name: 'English',
       },
       {
-        locale: 'fr',
-        img: require('@/assets/images/flags/fr.png'),
-        name: 'French',
+        locale: 'vn',
+        img: require('@/assets/images/flags/vn.png'),
+        name: 'Vietnamese',
       },
-      {
-        locale: 'de',
-        img: require('@/assets/images/flags/de.png'),
-        name: 'German',
-      },
-      {
-        locale: 'pt',
-        img: require('@/assets/images/flags/pt.png'),
-        name: 'Portuguese',
-      },
+      // {
+      //   locale: 'fr',
+      //   img: require('@/assets/images/flags/fr.png'),
+      //   name: 'French',
+      // },
+      // {
+      //   locale: 'de',
+      //   img: require('@/assets/images/flags/de.png'),
+      //   name: 'German',
+      // },
+      // {
+      //   locale: 'pt',
+      //   img: require('@/assets/images/flags/pt.png'),
+      //   name: 'Portuguese',
+      // },
     ]
     /* eslint-disable global-require */
 

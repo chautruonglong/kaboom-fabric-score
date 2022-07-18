@@ -3,10 +3,16 @@
     <b-row class="auth-inner m-0">
 
       <!-- Brand logo-->
-      <b-link class="brand-logo">
-        <vuexy-logo />
+      <b-link class="brand-logo d-flex justify-content-center align-items-center">
+        <!-- <vuexy-logo /> -->
+        <b-img
+          src="@/assets/images/logo/logo.png"
+          width="40"
+          height="40"
+          alt="logo"
+        />
         <h2 class="brand-text text-primary ml-1">
-          Vuexy
+          Kaboom Fabric Score
         </h2>
       </b-link>
       <!-- /Brand logo-->
@@ -41,13 +47,13 @@
             class="mb-1 font-weight-bold"
             title-tag="h2"
           >
-            Welcome to Vuexy! 👋
+            Welcome to Kaboom! 👋
           </b-card-title>
           <b-card-text class="mb-2">
             Please sign-in to your account and start the adventure
           </b-card-text>
 
-          <b-alert
+          <!-- <b-alert
             variant="primary"
             show
           >
@@ -66,7 +72,7 @@
               class="position-absolute"
               style="top: 10; right: 10;"
             />
-          </b-alert>
+          </b-alert> -->
 
           <!-- form -->
           <validation-observer

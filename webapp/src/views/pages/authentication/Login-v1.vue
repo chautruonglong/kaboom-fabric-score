@@ -5,15 +5,21 @@
       <!-- Login v1 -->
       <b-card class="mb-0">
         <b-link class="brand-logo">
-          <vuexy-logo />
+          <!-- <vuexy-logo /> -->
+          <b-img
+            src="@/assets/images/logo/logo.png"
+            width="40"
+            height="40"
+            alt="logo"
+          />
 
           <h2 class="brand-text text-primary ml-1">
-            Vuexy
+            Kaboom Fabric Score
           </h2>
         </b-link>
 
         <b-card-title class="mb-1">
-          Welcome to Vuexy! 👋
+          Welcome to Kaboom! 👋
         </b-card-title>
         <b-card-text class="mb-2">
           Please sign-in to your account and start the adventure
@@ -26,7 +32,7 @@
         >
           <b-form
             class="auth-login-form mt-2"
-            @submit.prevent
+            @submit.prevent="login"
           >
 
             <!-- email -->
@@ -162,11 +168,12 @@
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import {
-  BButton, BForm, BFormInput, BFormGroup, BCard, BLink, BCardTitle, BCardText, BInputGroup, BInputGroupAppend, BFormCheckbox,
+  BButton, BForm, BFormInput, BFormGroup, BCard, BLink, BCardTitle, BCardText, BInputGroup, BInputGroupAppend, BFormCheckbox, BImg
 } from 'bootstrap-vue'
 import VuexyLogo from '@core/layouts/components/Logo.vue'
 import { required, email } from '@validations'
 import { togglePasswordVisibility } from '@core/mixins/ui/forms'
+import useJwt from '@/auth/jwt/useJwt'
 
 export default {
   components: {
@@ -185,6 +192,7 @@ export default {
     BFormCheckbox,
     ValidationProvider,
     ValidationObserver,
+    BImg
   },
   mixins: [togglePasswordVisibility],
   data() {
@@ -200,6 +208,47 @@ export default {
   computed: {
     passwordToggleIcon() {
       return this.passwordFieldType === 'password' ? 'EyeIcon' : 'EyeOffIcon'
+    },
+  },
+  methods: {
+    login() {
+      this.$refs.loginForm.validate().then(success => {
+        if (success) {
+          useJwt.login({
+            email: this.userEmail,
+            password: this.password,
+          })
+            .then(response => {
+              const { userData } = response.data
+              useJwt.setToken(response.data.accessToken)
+              useJwt.setRefreshToken(response.data.refreshToken)
+              localStorage.setItem('userData', JSON.stringify(userData))
+              this.$ability.update(userData.ability)
+
+              // ? This is just for demo purpose as well.
+              // ? Because we are showing eCommerce app's cart items count in navbar
+              this.$store.commit('app-ecommerce/UPDATE_CART_ITEMS_COUNT', userData.extras.eCommerceCartItemsCount)
+
+              // ? This is just for demo purpose. Don't think CASL is role based in this case, we used role in if condition just for ease
+              this.$router.replace(getHomeRouteForLoggedInUser(userData.role))
+                .then(() => {
+                  this.$toast({
+                    component: ToastificationContent,
+                    position: 'top-right',
+                    props: {
+                      title: `Welcome ${userData.fullName || userData.username}`,
+                      icon: 'CoffeeIcon',
+                      variant: 'success',
+                      text: `You have successfully logged in as ${userData.role}. Now you can start to explore!`,
+                    },
+                  })
+                })
+            })
+            .catch(error => {
+              this.$refs.loginForm.setErrors(error.response.data.error)
+            })
+        }
+      })
     },
   },
 }
