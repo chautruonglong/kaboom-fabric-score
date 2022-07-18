@@ -15,8 +15,8 @@ spring:
                     filters:
                         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
 
-                -   id: service-chat
-                    uri: lb://SERVICE-CHAT
+                -   id: service-realtime
+                    uri: lb://SERVICE-REALTIME
                     predicates:
                         - Path=/api/chats/**, /api/rooms/**, /api/messages/**, /api/members/**, /api/chats-resources/**
                     filters:
