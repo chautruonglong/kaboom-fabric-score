@@ -1,12 +1,12 @@
 version: "3"
 services:
-    mvg-sky-nginx:
-        container_name: mvg-sky-nginx
-        image: nginx:alpine
-        restart: always
-        network_mode: host
-        volumes:
-            - ./nginx.conf:/etc/nginx/conf.d/mvg-sky.conf
+#    mvg-sky-nginx:
+#        container_name: mvg-sky-nginx
+#        image: nginx:alpine
+#        restart: always
+#        network_mode: host
+#        volumes:
+#            - ./nginx.conf:/etc/nginx/conf.d/mvg-sky.conf
 
     mvg-sky-postgres:
         container_name: mvg-sky-postgres
@@ -179,8 +179,8 @@ services:
             - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${REGISTRY}
             - SPRING_PROFILES_ACTIVE=${PROFILE}, native
 
-    mvg-sky-service-document:
-        container_name: mvg-sky-service-document
+    mvg-sky-service-swagger:
+        container_name: mvg-sky-service-swagger
         image: mvg-sky-service-document-jdk-17
         restart: always
         build: ./service-document
@@ -196,22 +196,22 @@ services:
             - SPRING_PROFILES_ACTIVE=${PROFILE}
             - SPRING_CLOUD_CONFIG_ENABLED=${CLOUD_CONFIG}
 
-    mvg-sky-admin-portal:
-        container_name: mvg-sky-admin-portal
-        image: mvg-sky-admin-portal-jdk-17
-        restart: always
-        build: ./admin-portal
-        ports:
-            - "3000:3000"
-        networks:
-            - mvg-sky-net
-        depends_on:
-            - mvg-sky-service-discovery
-            - mvg-sky-service-configuration
-        environment:
-            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${REGISTRY}
-            - SPRING_PROFILES_ACTIVE=${PROFILE}
-            - SPRING_CLOUD_CONFIG_ENABLED=${CLOUD_CONFIG}
+#    mvg-sky-admin-portal:
+#        container_name: mvg-sky-admin-portal
+#        image: mvg-sky-admin-portal-jdk-17
+#        restart: always
+#        build: ./admin-portal
+#        ports:
+#            - "3000:3000"
+#        networks:
+#            - mvg-sky-net
+#        depends_on:
+#            - mvg-sky-service-discovery
+#            - mvg-sky-service-configuration
+#        environment:
+#            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${REGISTRY}
+#            - SPRING_PROFILES_ACTIVE=${PROFILE}
+#            - SPRING_CLOUD_CONFIG_ENABLED=${CLOUD_CONFIG}
 
 networks:
     mvg-sky-net:
