@@ -24,7 +24,7 @@ public record MimeMessageBuilder(JavaMailSender javaMailSender) {
         mimeMessageHelper.setFrom(from);
         mimeMessageHelper.setTo(mailSendingRequest.getTo().toArray(String[]::new));
         mimeMessageHelper.setSubject(mailSendingRequest.getSubject());
-        mimeMessageHelper.setText(StringEscapeUtils.unescapeHtml(mailSendingRequest.getBody()), true);
+        mimeMessageHelper.setText(mailSendingRequest.getBody(), true);
 
         if(mailSendingRequest.getCc() != null) {
             mimeMessageHelper.setCc(mailSendingRequest.getCc().toArray(String[]::new));
