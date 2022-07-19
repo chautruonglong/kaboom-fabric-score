@@ -264,6 +264,7 @@ import Ripple from 'vue-ripple-directive'
 import { ref } from '@vue/composition-api'
 import { quillEditor } from 'vue-quill-editor'
 import vSelect from 'vue-select'
+import vCombobox from 'vue-combobox'
 
 export default {
   directives: {
@@ -282,6 +283,7 @@ export default {
     // 3rd Party
     quillEditor,
     vSelect,
+    vCombobox
   },
   model: {
     prop: 'shallShowEmailComposeModal',
@@ -317,6 +319,7 @@ export default {
     /* eslint-enable global-require */
 
     const sendEmail = () => {
+      console.log(composeData.value)
       composeData.value = {}
       emit('update:shall-show-email-compose-modal', false)
 

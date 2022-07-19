@@ -154,7 +154,8 @@
             :key="email.id"
             tag="li"
             no-body
-            :class="{ 'mail-read': email.isSeen }"
+            :class="{ 'mail-read': !email.isSeen }"
+            class="mb-1"
             @click="updateEmailViewData(email)"
           >
 
@@ -423,8 +424,8 @@ export default {
     const updateEmailViewData = email => {
       // Mark email is read
       store.dispatch('app-email/updateEmail', {
-        emailIds: [email.id],
-        dataToUpdate: { isRead: true },
+        mailId: email.mailId,
+        status: 'SEEN',
       })
         .then(() => {
           // If opened email is unread then decrease badge count for email meta based on email folder
@@ -433,7 +434,7 @@ export default {
           }
 
           // eslint-disable-next-line no-param-reassign
-          email.isRead = true
+          email.isSeen = true
         })
         .finally(() => {
           emailViewData.value = email

@@ -114,6 +114,24 @@ public class AccountController {
         }
     }
 
+    @GetMapping("/accounts")
+    public ResponseEntity<?> searchByEmail(@Nullable @RequestParam("domainId") String email,
+                                           @Nullable @RequestParam("sort") List<String> sorts,
+                                           @Nullable @RequestParam("offset") Integer offset,
+                                           @Nullable @RequestParam("limit") Integer limit) {
+        try {
+            sorts = sorts == null ? List.of("id") : sorts;
+            offset = offset == null ? 0 : offset;
+            limit = limit == null ? Integer.MAX_VALUE : limit;
+
+            return ResponseEntity.ok(accountService.searchByEmail(email, sorts, offset, limit));
+        }
+        catch(Exception exception) {
+            log.error(exception.getMessage());
+            throw new RequestException(exception.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PatchMapping("/accounts/{accountId}")
     public ResponseEntity<?> patchAccountApi(@PathVariable String accountId, @Valid @RequestBody AccountUpdateRequest accountUpdateRequest) {
         try {

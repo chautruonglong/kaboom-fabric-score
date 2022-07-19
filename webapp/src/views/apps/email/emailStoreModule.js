@@ -26,7 +26,9 @@ export default {
     updateEmail(ctx, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post('/apps/email/update-emails', payload)
+          .patch(`${baseUrl}/mails/change-status/${payload.mailId}`, {
+            status: payload.status
+          })
           .then(response => resolve(response))
           .catch(error => reject(error))
       })

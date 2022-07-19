@@ -1581,6 +1581,15 @@
     postcss "^8.4.14"
     source-map "^0.6.1"
 
+"@vue/compiler-sfc@2.7.7":
+  version "2.7.7"
+  resolved "https://registry.yarnpkg.com/@vue/compiler-sfc/-/compiler-sfc-2.7.7.tgz#74aebb24c1ebfa22642c70f27ffaeca4dabdf692"
+  integrity sha512-Ah8dIuo6ZVPHTq9+s4rBU/YpJu3vGSNyeOTCrPrVPQnkUfnT5Ig+IKBhePuQWFXguYb2TuEWrEfiiX9DZ3aJlA==
+  dependencies:
+    "@babel/parser" "^7.18.4"
+    postcss "^8.4.14"
+    source-map "^0.6.1"
+
 "@vue/component-compiler-utils@^3.1.0", "@vue/component-compiler-utils@^3.1.2":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@vue/component-compiler-utils/-/component-compiler-utils-3.3.0.tgz#f9f5fb53464b0c37b2c8d2f3fbfe44df60f61dc9"
@@ -9326,6 +9335,13 @@ vue-clipboard2@0.3.1:
   dependencies:
     clipboard "^2.0.0"
 
+vue-combobox@^0.9.5:
+  version "0.9.5"
+  resolved "https://registry.yarnpkg.com/vue-combobox/-/vue-combobox-0.9.5.tgz#f62e59d8f90965f55dadf1c1bad9306eb9568e66"
+  integrity sha512-nK7UKYuBzuh0M49duDFAb6b8/ZA7ILuPhqWFNeE7uIr+q3P7Uggr+hR3uGTCFSDlXQLaxsKuPH4ZYDuJqWD7sQ==
+  dependencies:
+    vue "^2.5.11"
+
 vue-context@6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/vue-context/-/vue-context-6.0.0.tgz#97a1a423fc86fb7a54f46d1567670aba281a5970"
@@ -9543,6 +9559,14 @@ vue@^2.2.1, vue@^2.4.4, vue@^2.6.10:
   integrity sha512-7MTirXG7LYJi3r2jeYy7EiXIhEE85uP3kBwSxqwDsvIfy/l7+qR4U6ajw8ji1KoP+wYYg7ZY28TBTf3P3Fa4Nw==
   dependencies:
     "@vue/compiler-sfc" "2.7.3"
+    csstype "^3.1.0"
+
+vue@^2.5.11:
+  version "2.7.7"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.7.7.tgz#e3a966944e461e4abb496c82362e8763e98e6527"
+  integrity sha512-osfkncsGCWqtch+YWYxbqTNQ9hl/UQ6TFRkdmK/VqAjuMpxzr5QotFsYpmJ1AB1ez2LJeIKXDmtMkXUotMOTsA==
+  dependencies:
+    "@vue/compiler-sfc" "2.7.7"
     csstype "^3.1.0"
 
 vuedraggable@2.24.3:

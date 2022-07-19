@@ -25,6 +25,11 @@ public interface AccountService  {
                                              Integer offset,
                                              Integer limit);
 
+    Collection<AccountEntity> searchByEmail(String email,
+                                            List<String> sorts,
+                                            Integer offset,
+                                            Integer limit);
+
     Integer logoutAccount(String accountId, String refreshToken, Boolean all);
 
     Integer deleteAccountById(String accountId) throws ReflectionException, InstanceNotFoundException, MBeanException, IOException;

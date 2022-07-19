@@ -193,4 +193,14 @@ public class AccountServiceImpl implements AccountService {
         log.info("create account with profile {}", accountProfileCreationResponse);
         return accountProfileCreationResponse;
     }
+
+    @Override
+    public Collection<AccountEntity> searchByEmail(String email,
+                                                   List<String> sorts,
+                                                   Integer offset,
+                                                   Integer limit) {
+        Sort sort = Sort.by(Sort.Direction.ASC, sorts.toArray(String[]::new));
+        Pageable pageable = PageRequest.of(offset, limit, sort);
+        return accountRepository.searchAllByUsername(email, pageable);
+    }
 }
