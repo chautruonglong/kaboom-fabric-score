@@ -41,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .accessDeniedHandler(accessDeniedHandlerImpl)
             .authenticationEntryPoint(unAuthorizationHandler);
 
-        http.addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

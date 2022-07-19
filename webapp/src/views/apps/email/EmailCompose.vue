@@ -122,6 +122,7 @@
           :close-on-select="false"
           :options="emailToOptions"
           input-id="email-to"
+          @search="fetchOptions"
         >
 
           <template #option="{ avatar, name }">
@@ -166,6 +167,7 @@
           :close-on-select="false"
           :options="emailToOptions"
           input-id="email-cc"
+          @search="fetchOptions"
         >
 
           <template #option="{ avatar, name }">
@@ -350,7 +352,7 @@ export default {
       const baseUrl = process.env.VUE_APP_API_URL
 
       axios
-          .get(`${baseUrl}/accounts/search?search${search}`)
+          .get(`${baseUrl}/accounts/search?email=${search}`)
           .then(response => {
               this.emailToOptions = response.data.map(i => i.username)
               resolve(response)
