@@ -42,7 +42,7 @@ public class DataFaker {
                 .domainId(domainEntity.getId())
                 .username(email.substring(0, email.indexOf('@')))
                 .password(mockNeat.passwords().get())
-                .roles(new RoleEnumeration[] {RoleEnumeration.EMPLOYEE})
+                .roles(new RoleEnumeration[] {RoleEnumeration.STUDENT})
                 .build()
             ).collect(Collectors.toList());
             List<AccountEntity> savedAccountEntityList = accountRepository.saveAll(accountEntities);

@@ -16,122 +16,46 @@
     </b-row>
 
     <b-row class="match-height">
-      <b-col lg="4">
-        <b-row class="match-height">
-          <!-- Bar Chart - Orders -->
-          <b-col
-            lg="6"
-            md="3"
-            cols="6"
-          >
-            <ecommerce-order-chart :data="data.statisticsOrder" />
-          </b-col>
-          <!--/ Bar Chart - Orders -->
-          <b-col
-            lg="6"
-            md="3"
-            cols="6"
-          >
-            <ecommerce-profit-chart :data="data.statisticsProfit" />
-          </b-col>
-          <b-col
-            lg="12"
-            md="6"
-          >
-            <ecommerce-earnings-chart :data="data.earningsChart" />
-          </b-col>
-        </b-row>
+      <b-col>
+        <b-button
+          v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+          variant="primary"
+          :class="{ 'mb-2': !isOpen }"
+          @click="isOpen = !isOpen"
+        >Collapse</b-button>
+        <b-collapse
+          v-model="isOpen"
+        >
+          <ecommerce-company-table :table-data="data.companyTable" />
+        </b-collapse>
       </b-col>
-
-      <!-- Revenue Report Card -->
-      <b-col lg="8">
-        <ecommerce-revenue-report :data="data.revenue" />
-      </b-col>
-      <!--/ Revenue Report Card -->
-    </b-row>
-
-    <b-row class="match-height">
-      <!-- Company Table Card -->
-      <b-col lg="8">
-        <ecommerce-company-table :table-data="data.companyTable" />
-      </b-col>
-      <!--/ Company Table Card -->
-
-      <!-- Developer Meetup Card -->
-      <b-col
-        lg="4"
-        md="6"
-      >
-        <ecommerce-meetup :data="data.meetup" />
-      </b-col>
-      <!--/ Developer Meetup Card -->
-
-      <!-- Browser States Card -->
-      <b-col
-        lg="4"
-        md="6"
-      >
-        <ecommerce-browser-states />
-      </b-col>
-      <!--/ Browser States Card -->
-
-      <!-- Goal Overview Card -->
-      <b-col
-        lg="4"
-        md="6"
-      >
-        <ecommerce-goal-overview :data="data.goalOverview" />
-      </b-col>
-      <!--/ Goal Overview Card -->
-
-      <!-- Transaction Card -->
-      <b-col
-        lg="4"
-        md="6"
-      >
-        <ecommerce-transactions :data="data.transactionData" />
-      </b-col>
-      <!--/ Transaction Card -->
     </b-row>
   </section>
 </template>
 
 <script>
-import { BRow, BCol } from 'bootstrap-vue'
+import { BRow, BCol, BCollapse, BButton } from 'bootstrap-vue'
 
 import { getUserData } from '@/auth/utils'
 import EcommerceMedal from './EcommerceMedal.vue'
 import EcommerceStatistics from './EcommerceStatistics.vue'
-import EcommerceRevenueReport from './EcommerceRevenueReport.vue'
-import EcommerceOrderChart from './EcommerceOrderChart.vue'
-import EcommerceProfitChart from './EcommerceProfitChart.vue'
-import EcommerceEarningsChart from './EcommerceEarningsChart.vue'
 import EcommerceCompanyTable from './EcommerceCompanyTable.vue'
-import EcommerceMeetup from './EcommerceMeetup.vue'
-import EcommerceBrowserStates from './EcommerceBrowserStates.vue'
-import EcommerceGoalOverview from './EcommerceGoalOverview.vue'
-import EcommerceTransactions from './EcommerceTransactions.vue'
 
 export default {
   components: {
     BRow,
     BCol,
+    BCollapse,
+    BButton,
 
     EcommerceMedal,
     EcommerceStatistics,
-    EcommerceRevenueReport,
-    EcommerceOrderChart,
-    EcommerceProfitChart,
-    EcommerceEarningsChart,
     EcommerceCompanyTable,
-    EcommerceMeetup,
-    EcommerceBrowserStates,
-    EcommerceGoalOverview,
-    EcommerceTransactions,
   },
   data() {
     return {
       data: {},
+      isOpen: true
     }
   },
   created() {

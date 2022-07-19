@@ -296,8 +296,8 @@ export default {
                 }]
               }
 
-              useJwt.setToken(response.data.accessToken)
-              useJwt.setRefreshToken(response.data.refreshToken)
+              // useJwt.setToken(response.data.accessToken)
+              // useJwt.setRefreshToken(response.data.refreshToken)
               localStorage.setItem('userData', JSON.stringify(account))
               this.$ability.update(account.ability)
 

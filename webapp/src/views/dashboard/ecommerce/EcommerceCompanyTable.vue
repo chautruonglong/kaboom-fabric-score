@@ -98,11 +98,18 @@ export default {
   data() {
     return {
       fields: [
-        { key: 'company', label: 'COMPANY' },
-        { key: 'category', label: 'CATEGORY' },
-        { key: 'views', label: 'VIEWS' },
-        { key: 'revenue', label: 'REVENUE' },
-        { key: 'sales', label: 'SALES' },
+        { key: 'subject', label: 'SUBJECT' },
+        { key: 'credits', label: 'CREDITS' },
+        { key: 'bt', label: 'BT' },
+        { key: 'bv', label: 'BV' },
+        { key: 'cc', label: 'CC' },
+        { key: 'ck', label: 'CK' },
+        { key: 'gk', label: 'GK' },
+        { key: 'lt', label: 'LT' },
+        { key: 'qt', label: 'qt' },
+        { key: 'TH', label: 'TH' },
+        { key: 'score', label: 'SCORE' },
+        { key: 'grade', label: 'GRADE' },
       ],
     }
   },

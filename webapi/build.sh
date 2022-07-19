@@ -19,6 +19,7 @@ export JAVA_HOME=/root/.sdkman/candidates/java/17.0.3-oracle
   -pl service-imap \
   -pl service-configuration \
   -pl service-document \
+  -pl service-blockchain-fabric \
   -pl admin-portal
 
 export PROFILE=local

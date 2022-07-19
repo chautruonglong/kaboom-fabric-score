@@ -12,16 +12,16 @@ export default [
     route: 'apps-chat',
     icon: 'MessageSquareIcon',
   },
-  {
-    title: 'Todo',
-    route: 'apps-todo',
-    icon: 'CheckSquareIcon',
-  },
-  {
-    title: 'Calendar',
-    route: 'apps-calendar',
-    icon: 'CalendarIcon',
-  },
+  // {
+  //   title: 'Todo',
+  //   route: 'apps-todo',
+  //   icon: 'CheckSquareIcon',
+  // },
+  // {
+  //   title: 'Calendar',
+  //   route: 'apps-calendar',
+  //   icon: 'CalendarIcon',
+  // },
   {
     title: 'User',
     icon: 'UserIcon',

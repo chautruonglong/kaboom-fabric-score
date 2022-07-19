@@ -351,6 +351,9 @@ export default {
     }
 
     fetchEmails()
+    setInterval(() => {
+      fetchEmails()
+    }, 2000)
 
     // ------------------------------------------------
     // Mail Selection

@@ -135,6 +135,26 @@ services:
             - SPRING_PROFILES_ACTIVE=${PROFILE}
             - SPRING_CLOUD_CONFIG_ENABLED=${CLOUD_CONFIG}
 
+    mvg-sky-service-blockchain:
+        container_name: mvg-sky-service-blockchain
+        image: mvg-sky-service-blockchain-jdk-17
+        restart: always
+        build: ./service-blockchain-fabric
+        ports:
+            - "8009:8009"
+        networks:
+            - mvg-sky-net
+        depends_on:
+            - mvg-sky-service-discovery
+            - mvg-sky-service-configuration
+        environment:
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${REGISTRY}
+            - SPRING_DATASOURCE_URL=${PG_URL}
+            - SPRING_DATASOURCE_USERNAME=${PG_USERNAME}
+            - SPRING_DATASOURCE_PASSWORD=${PG_PASSWORD}
+            - SPRING_PROFILES_ACTIVE=${PROFILE}
+            - SPRING_CLOUD_CONFIG_ENABLED=${CLOUD_CONFIG}
+
     mvg-sky-service-discovery:
         container_name: mvg-sky-service-discovery
         image: mvg-sky-service-discovery-jdk-17

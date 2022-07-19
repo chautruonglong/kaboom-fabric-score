@@ -269,6 +269,7 @@ import { quillEditor } from 'vue-quill-editor'
 import vSelect from 'vue-select'
 import vCombobox from 'vue-combobox'
 import axios from '@axios'
+import { getUserData } from '@/auth/utils'
 
 export default {
   directives: {
@@ -299,6 +300,18 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      emailToOptions: [
+      // { avatar: require('@/assets/images/avatars/1-small.png'), name: 'Jane Foster' },
+      // { avatar: require('@/assets/images/avatars/3-small.png'), name: 'Donna Frank' },
+      // { avatar: require('@/assets/images/avatars/5-small.png'), name: 'Gabrielle Robertson' },
+      // { avatar: require('@/assets/images/avatars/7-small.png'), name: 'Lori Spears' },
+      // { avatar: require('@/assets/images/avatars/9-small.png'), name: 'Sandy Vega' },
+      // { avatar: require('@/assets/images/avatars/11-small.png'), name: 'Cheryl May' },
+    ]
+    }
+  },
   setup(_, { emit }) {
     const composeData = ref({})
     const showCcField = ref(false)
@@ -310,24 +323,31 @@ export default {
       },
       placeholder: 'Message',
     }
-
-    /* eslint-disable global-require */
-    const emailToOptions = [
-      { avatar: require('@/assets/images/avatars/1-small.png'), name: 'Jane Foster' },
-      { avatar: require('@/assets/images/avatars/3-small.png'), name: 'Donna Frank' },
-      { avatar: require('@/assets/images/avatars/5-small.png'), name: 'Gabrielle Robertson' },
-      { avatar: require('@/assets/images/avatars/7-small.png'), name: 'Lori Spears' },
-      { avatar: require('@/assets/images/avatars/9-small.png'), name: 'Sandy Vega' },
-      { avatar: require('@/assets/images/avatars/11-small.png'), name: 'Cheryl May' },
-    ]
     /* eslint-enable global-require */
 
     const sendEmail = () => {
-      console.log(composeData.value)
-      composeData.value = {}
       emit('update:shall-show-email-compose-modal', false)
 
-      // ? Send your Email
+      const baseUrl = process.env.VUE_APP_API_URL
+      const userData = getUserData()
+      const formData = new FormData()
+
+      formData.append("accountId", userData.id)
+      formData.append("to", composeData.value.to?.map(i => i.name))
+      formData.append("cc", composeData.value.cc?.map(i => i.name) || [])
+      formData.append("bcc", composeData.value.bcc?.map(i => i.name) || [])
+      formData.append("subject", composeData.value.subject)
+      formData.append("body", composeData.value.message)
+      formData.append("enableThread", true)
+
+      axios({
+        method: "post",
+        url: `${baseUrl}/mails/send`,
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" }
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
     }
 
     const discardEmail = () => {
@@ -338,7 +358,6 @@ export default {
     return {
       composeData,
       editorOption,
-      emailToOptions,
       showCcField,
       showBccField,
 
@@ -354,7 +373,7 @@ export default {
       axios
           .get(`${baseUrl}/accounts/search?email=${search}`)
           .then(response => {
-              this.emailToOptions = response.data.map(i => i.username)
+              this.emailToOptions = response.data.map(i => ({ avatar: null, name: i.username}))
               resolve(response)
           })
           .catch(error => reject(error))
