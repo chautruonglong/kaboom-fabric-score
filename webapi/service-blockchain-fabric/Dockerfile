@@ -1,5 +1,5 @@
 FROM openjdk:17-jdk-alpine3.14
-ENV NAME=service-blockchain
+ENV NAME=service-blockchain-fabric
 ENV PORT=8009
 
 WORKDIR /${NAME}/

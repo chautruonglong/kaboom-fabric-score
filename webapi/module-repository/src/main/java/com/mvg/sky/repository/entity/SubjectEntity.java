@@ -68,4 +68,6 @@ public class SubjectEntity extends BaseEntity {
     @Column(name = "grade", nullable = false, columnDefinition = "text")
     private String grade;
 
+    @Column(name = "term", nullable = false, columnDefinition = "text")
+    private String term;
 }
