@@ -17,7 +17,7 @@
         :delay="{ show: 1000, hide: 50 }"
       />
     </b-nav-item>
-    <b-nav-item-dropdown
+    <!-- <b-nav-item-dropdown
       link-classes="bookmark-star"
       lazy
       @hidden="resetsearchQuery"
@@ -29,7 +29,6 @@
         class="text-warning"
       />
 
-      <!-- Dropdown Content -->
       <li style="min-width:300px">
         <div class="p-1">
           <b-form-input
@@ -76,7 +75,7 @@
             No Results Found.
           </b-dropdown-item></vue-perfect-scrollbar>
       </li>
-    </b-nav-item-dropdown>
+    </b-nav-item-dropdown> -->
 
   </b-navbar-nav>
 </template>

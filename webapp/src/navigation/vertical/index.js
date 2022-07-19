@@ -38,4 +38,4 @@ import uiElements from './ui-elements'
 import formAndTable from './forms-and-table'
 
 // Array of sections
-export default [...appsAndPages]
+export default [...dashboard, ...appsAndPages]

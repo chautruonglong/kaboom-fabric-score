@@ -2,6 +2,6 @@ export default [
   {
     title: 'Dashboards',
     icon: 'HomeIcon',
-    route: 'dashboard-analytics'
+    route: 'dashboard'
   },
 ]

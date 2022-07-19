@@ -28,7 +28,7 @@
     </template>
 
     <b-dropdown-item
-      :to="{ name: 'pages-profile'}"
+      :to="{ name: 'apps-users-edit', params: { id: 21 } }"
       link-class="d-flex align-items-center"
     >
       <feather-icon
@@ -49,7 +49,7 @@
       />
       <span>Inbox</span>
     </b-dropdown-item>
-    <b-dropdown-item
+    <!-- <b-dropdown-item
       :to="{ name: 'apps-todo' }"
       link-class="d-flex align-items-center"
     >
@@ -59,7 +59,7 @@
         class="mr-50"
       />
       <span>Task</span>
-    </b-dropdown-item>
+    </b-dropdown-item> -->
     <b-dropdown-item
       :to="{ name: 'apps-chat' }"
       link-class="d-flex align-items-center"
@@ -85,7 +85,7 @@
       />
       <span>Settings</span>
     </b-dropdown-item>
-    <b-dropdown-item
+    <!-- <b-dropdown-item
       :to="{ name: 'pages-pricing' }"
       link-class="d-flex align-items-center"
     >
@@ -95,8 +95,8 @@
         class="mr-50"
       />
       <span>Pricing</span>
-    </b-dropdown-item>
-    <b-dropdown-item
+    </b-dropdown-item> -->
+    <!-- <b-dropdown-item
       :to="{ name: 'pages-faq' }"
       link-class="d-flex align-items-center"
     >
@@ -106,7 +106,7 @@
         class="mr-50"
       />
       <span>FAQ</span>
-    </b-dropdown-item>
+    </b-dropdown-item> -->
     <b-dropdown-item
       link-class="d-flex align-items-center"
       @click="logout"
