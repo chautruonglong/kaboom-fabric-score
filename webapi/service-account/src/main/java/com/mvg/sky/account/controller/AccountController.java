@@ -114,7 +114,7 @@ public class AccountController {
         }
     }
 
-    @GetMapping("/accounts")
+    @GetMapping("/search-accounts")
     public ResponseEntity<?> searchByEmail(@Nullable @RequestParam("domainId") String email,
                                            @Nullable @RequestParam("sort") List<String> sorts,
                                            @Nullable @RequestParam("offset") Integer offset,

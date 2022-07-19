@@ -202,6 +202,7 @@
           :close-on-select="false"
           :options="emailToOptions"
           input-id="email-bcc"
+          @search="fetchOptions"
         >
 
           <template #option="{ avatar, name }">
@@ -265,6 +266,7 @@ import { ref } from '@vue/composition-api'
 import { quillEditor } from 'vue-quill-editor'
 import vSelect from 'vue-select'
 import vCombobox from 'vue-combobox'
+import axios from '@axios'
 
 export default {
   directives: {
@@ -343,6 +345,16 @@ export default {
       discardEmail,
     }
   },
+  methods: {
+    fetchOptions(search) {
+      const baseUrl = process.env.VUE_APP_API_URL
+
+      axios
+          .get(`${baseUrl}/acc`, { params: payload })
+          .then(response => resolve(response))
+          .catch(error => reject(error))
+    }
+  }
 }
 </script>
 
