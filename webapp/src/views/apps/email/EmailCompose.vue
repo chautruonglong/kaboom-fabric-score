@@ -350,7 +350,7 @@ export default {
       const baseUrl = process.env.VUE_APP_API_URL
 
       axios
-          .get(`${baseUrl}/acc`, { params: payload })
+          .get(`${baseUrl}/search`, { params: payload })
           .then(response => resolve(response))
           .catch(error => reject(error))
     }
