@@ -10,3 +10,4 @@ services:
         - "5000:3000"
     environment:
       - PORT=3000
+      - VUE_APP_API_URL=http://api.mvg-sky.com/api
