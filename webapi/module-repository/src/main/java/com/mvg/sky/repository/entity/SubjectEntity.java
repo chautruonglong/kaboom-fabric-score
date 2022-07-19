@@ -22,52 +22,52 @@ public class SubjectEntity extends BaseEntity {
     @Column(name = "credits", nullable = false)
     private Integer credits;
 
-    @Column(name = "bt", nullable = false)
+    @Column(name = "bt")
     private Float bt;
-    @Column(name = "wbt", nullable = false)
+    @Column(name = "wbt")
     private Float wbt;
 
-    @Column(name = "bv", nullable = false)
+    @Column(name = "bv")
     private Float bv;
-    @Column(name = "wbv", nullable = false)
+    @Column(name = "wbv")
     private Float wbv;
 
-    @Column(name = "cc", nullable = false)
+    @Column(name = "cc")
     private Float cc;
-    @Column(name = "wcc", nullable = false)
+    @Column(name = "wcc")
     private Float wcc;
 
-    @Column(name = "ck", nullable = false)
+    @Column(name = "ck")
     private Float ck;
-    @Column(name = "wck", nullable = false)
+    @Column(name = "wck")
     private Float wck;
 
-    @Column(name = "gk", nullable = false)
+    @Column(name = "gk")
     private Float gk;
-    @Column(name = "wgk", nullable = false)
+    @Column(name = "wgk")
     private Float wgk;
 
-    @Column(name = "lt", nullable = false)
+    @Column(name = "lt")
     private Float lt;
-    @Column(name = "wlt", nullable = false)
+    @Column(name = "wlt")
     private Float wlt;
 
-    @Column(name = "qt", nullable = false)
+    @Column(name = "qt")
     private Float qt;
-    @Column(name = "wqt", nullable = false)
+    @Column(name = "wqt")
     private Float wqt;
 
-    @Column(name = "th", nullable = false)
+    @Column(name = "th")
     private Float th;
-    @Column(name = "wth", nullable = false)
+    @Column(name = "wth")
     private Float wth;
 
-    @Column(name = "score", nullable = false)
+    @Column(name = "score")
     private Float score;
 
-    @Column(name = "grade", nullable = false, columnDefinition = "text")
+    @Column(name = "grade", columnDefinition = "text")
     private String grade;
 
-    @Column(name = "term", nullable = false, columnDefinition = "text")
+    @Column(name = "term", columnDefinition = "text")
     private String term;
 }
