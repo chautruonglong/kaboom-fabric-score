@@ -51,5 +51,5 @@ public interface AccountRepository extends JpaRepository<AccountEntity, UUID> {
 
     List<AccountEntity> findAllByUsernameInAndIsDeletedFalseAndIsActiveTrue(Collection<String> usernames);
 
-    List<AccountEntity> searchAllByUsernameLike(String email, Pageable pageable);
+    List<AccountEntity> searchAllByUsernameStartingWith(String email, Pageable pageable);
 }
