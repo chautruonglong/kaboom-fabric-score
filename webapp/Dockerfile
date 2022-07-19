@@ -11,5 +11,4 @@ WORKDIR /app
 RUN npm i -g serve
 COPY --from=build /app/dist ./dist
 
-EXPOSE 80
 CMD [ "serve", "-s", "dist" ]

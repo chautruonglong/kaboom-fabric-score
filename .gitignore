@@ -40,7 +40,6 @@
 **/.nitro
 **/.cache
 **/.output
-**/.env
 **/dist
 
 ### fabric ###
