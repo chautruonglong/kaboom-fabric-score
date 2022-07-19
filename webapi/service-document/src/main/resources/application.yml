@@ -7,3 +7,5 @@ springdoc:
               url: http://api.mvg-sky.com/api/realtime/api-docs
             - name: service-mail
               url: http://api.mvg-sky.com/api/mails/api-docs
+            - name: service-blockchain
+              url: http://api.mvg-sky.com/api/blockchains/api-docs
