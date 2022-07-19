@@ -350,8 +350,11 @@ export default {
       const baseUrl = process.env.VUE_APP_API_URL
 
       axios
-          .get(`${baseUrl}/search`, { params: payload })
-          .then(response => resolve(response))
+          .get(`${baseUrl}/accounts/search?search${search}`)
+          .then(response => {
+              this.emailToOptions = response.data.map(i => i.username)
+              resolve(response)
+          })
           .catch(error => reject(error))
     }
   }

@@ -201,6 +201,6 @@ public class AccountServiceImpl implements AccountService {
                                                    Integer limit) {
         Sort sort = Sort.by(Sort.Direction.ASC, sorts.toArray(String[]::new));
         Pageable pageable = PageRequest.of(offset, limit, sort);
-        return accountRepository.searchAllByUsername(email, pageable);
+        return accountRepository.searchAllByUsernameLike(email, pageable);
     }
 }
